@@ -27,7 +27,8 @@ router.get('/getPokemon', function(req, res, next) {
 	//var pokemonResults = [];
 	var searchStr = req.query.q;
 	var url = "https://api.pokemontcg.io/v1/cards?name=" + searchStr;
-	var cards = request(url);
+	//console.log(url);
+	request(url).pipe(res);
 	//if (searchStr) 
 	  //var myRe = new RegExp("^" + req.query.q.toLowerCase());
 	//else
@@ -40,8 +41,8 @@ router.get('/getPokemon', function(req, res, next) {
 	    pokemonResults.push({name:pokemon[i].name,url:pokemon[i].url});
 	  }
 	}*/
-	console.log(cards);
-	res.send(cards);
+	//console.log(cards);
+	//res.send(cards);
   
 })
 /*

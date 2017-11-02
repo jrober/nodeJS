@@ -21,7 +21,7 @@ function pokemonFetcher ($http) {
 */
 
 function mainCtrl ($scope, $http) {
-  $scope.pokemon = [{name: 'john',url: 'http://besd.byu.edu/sites/besd.byu.edu/files/JustinRobertsSquare.png'}, {name: 'jacob', url: 'https://imageservicestoreag.blob.core.windows.net/imagecatalog/e35916b8cb614c979c2456c2bce5cc40v1.jpeg'}];
+  $scope.pokemon = [];
   $scope.imageURL = '';
 
   $scope.changeURL = function(url) {
@@ -29,15 +29,14 @@ function mainCtrl ($scope, $http) {
   }
 
   $scope.updateList = function() {
-    console.log($scope.pokemonInput);
+    //console.log($scope.pokemonInput);
     pokiURL = '/getPokemon?q=' + $scope.pokemonInput;
-    console.log(pokiURL);
+    //console.log(pokiURL);
     $http.get(pokiURL).success(function(response){
-      console.log(response);
+      //console.log(response.cards);
       $scope.pokemon = response.cards;
-      console.log($scope.pokemon);
     }).error(function(response){
-      console.log(error);
+      console.log(response);
     });
   }
 
