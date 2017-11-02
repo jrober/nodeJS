@@ -7,14 +7,16 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
 	    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-	    <script
+	    <!--<script
 	      src="http://code.jquery.com/jquery-3.2.1.min.js"
 	      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	      crossorigin="anonymous">
-	    </script>
+	    </script>-->
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
 
-	    <script	src="jquery.js">
-		</script>
+		<script src="javascripts/app.js"></script>
+
+		<link rel="stylesheet" href="/stylesheets/style.css">
 
 		<style>
 	      body {
@@ -28,7 +30,7 @@
 		   <!-- Navigation -->
 	    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	      <div class="container">
-	        <a class="navbar-brand" href="#">The Good Old Express</a>
+	        <a class="navbar-brand" href="#">Select a Pokemon</a>
 	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 	          <span class="navbar-toggler-icon"></span>
 	        </button>
@@ -44,55 +46,39 @@
 	      </div>
 	    </nav>
 
-	    <div class="container" style="margin-top: 15px;">
-			<form>
-				<div class="form-group">
-					<div class="row">
-						<div class="col-lg-6">
-						    <div class="input-group">							    
-						      <span class="input-group-btn">
-						        <button class="btn btn-secondary" type="submit" value="Submit" id="weatherButton">Submit</button>
-						      </span>
-						      <input type="text" class="form-control" id="cityField" placeholder="Enter a Utah City" aria-label="Enter a Utah City">
-						    </div>
-						    <div class="row" style="padding-top: 50px;">
-								<label for="weatherInfo" >Suggestions:</label>
-								<span id="txtHint" ></span>
+	    <div id='app' ng-app='app' ng-controller='mainCtrl'>
+		    <div class="container" style="margin-top: 15px;">
+				<form>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-6">
+							    <div class="input-group">							    
+							      <span class="input-group-btn">
+							        <button class="btn btn-secondary" type="submit" value="Submit" id="pokemonSelect">Select</button>
+							      </span>
+							      <input type="text" class="form-control" id="pokemonInput" ng-keyup="updateList()" ng-model='pokemonInput' placeholder="Enter a Pokemon" aria-label="Enter a Pokemon">
+							    </div>
+							    <div class="row" style="padding-top: 50px;">
+							    	<ul>
+								    	<li ng-repeat="poki in pokemon  | orderBy: 'name'">
+									        <span class = "listItem" ng-click="changeURL(poki.imageUrl)">{{poki.name}}</span>
+									    </li>
+									</ul>
+									<!--<label for="pokemonSuggestions" >Suggestions:</label>
+									<span id="pokemonSuggestions" ></span>-->
+								</div>
+							 </div>
+							 <div class="col-lg-6" >
+								<p>Selected Pokemon</p>							
+								<img id="pokemonImage" ng-src="{{imageURL}}" alt="Pokemon Image" height="200" width="200">
 							</div>
-						 </div>
-						 <div class="col-lg-6" >
-							<textarea id="displayCity">No City</textarea>
-							<p>Current Weather</p>
-							
-							<div id="weather">No weather</div>
 						</div>
-					</div>
-						
-					
-					
-				</div>
-			</form>
-		</div>
-		<div class="container" style="margin-top: 100px;">
-			<form>
-				<div class="form-group">
-					<div class="row">
-						<div class="col-lg-6">
-						    <div class="input-group">							    
-						      <span class="input-group-btn">
-						        <button class="btn btn-secondary" type="submit" value="Submit" id="searchButton">Search</button>
-						      </span>
-						      <input type="text" class="form-control" id="searchStack" placeholder="Search Term" aria-label="Search Term">
-						    </div>
-						    <div class="row" style="padding-top: 50px;">
-								<label for="Results" >Search Results</label>
 							
-								<div id="searchResults"></div>
-							</div>
-						 </div>	
+						
+						
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 
 	</body>
